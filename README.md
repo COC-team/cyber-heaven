@@ -6,7 +6,7 @@ You are happy and see many good guys and angels.
 Then appear some flashes and colors change to red and black and flower changes to sword. 
 You see some bad guys and demons. And must slash them with your sword to escape from this hell to reality.
 
-Button control says to you: "Out of control!" and damages a little you.
+Button Ctrl says to you: "Out of control!" and damages a little you.
 
 ## Screenshots / Gameplay Trailer
 
