@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Animator animator;
-    public float moveSpeed = 10f; // Base movement speed, you can adjust this
+    public float moveSpeed = 5f; // Base movement speed, you can adjust this
     private Rigidbody2D rb;
     private Vector2 movement;
 
