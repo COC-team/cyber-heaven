@@ -8,7 +8,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NightLeftAttack
-  m_Speed: 1
+  m_Speed: 0.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 200229533088629602}
@@ -111,7 +111,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NightRightAttack
-  m_Speed: 1
+  m_Speed: 0.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3145353116182747846}
@@ -575,10 +575,10 @@ AnimatorStateMachine:
     m_Position: {x: 230, y: 470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8499422920812431498}
-    m_Position: {x: 230, y: 360, z: 0}
+    m_Position: {x: 220, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6045207318737262674}
-    m_Position: {x: 1180, y: 340, z: 0}
+    m_Position: {x: 1160, y: 240, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
