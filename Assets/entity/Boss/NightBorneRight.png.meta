@@ -593,7 +593,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RightAttack19
+      name: RightAttack9
       rect:
         serializedVersion: 2
         x: 664
@@ -1287,7 +1287,6 @@ TextureImporter:
       RightAttack10: 877750099
       RightAttack11: 1594393475
       RightAttack12: 382805151
-      RightAttack19: -767366951
       RightAttack2: -1832793235
       RightAttack3: 1408251505
       RightAttack4: -839881276
@@ -1295,6 +1294,7 @@ TextureImporter:
       RightAttack6: 514543064
       RightAttack7: 975735188
       RightAttack8: 525968264
+      RightAttack9: -767366951
       RightDamage1: -1265003216
       RightDamage2: -1540464232
       RightDamage3: -1622800407
