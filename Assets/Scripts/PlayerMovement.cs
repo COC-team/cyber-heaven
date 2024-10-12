@@ -23,7 +23,13 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Vertical", vertical);
 
         // Create a movement vector
-        movement = new Vector2(horizontal, vertical).normalized;
+        movement = new Vector2(horizontal, vertical);
+
+        // Normalize only when moving diagonally
+        if (movement.sqrMagnitude > 1)
+        {
+            movement = movement.normalized;
+        }
     }
 
     void FixedUpdate()
