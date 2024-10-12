@@ -428,12 +428,13 @@ MonoBehaviour:
   animator: {fileID: 183284555}
   moveSpeed: 3
   attackRange: 0.5
-  attackMarginFromPlayer: 0.5
+  attackMarginFromEntity: 0.5
   attackDamage: 2
   attackPoint: {fileID: 0}
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  maxHealth: 50
 --- !u!114 &183284558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1983,13 +1984,13 @@ GameObject:
   - component: {fileID: 656781012}
   - component: {fileID: 656781011}
   - component: {fileID: 656781010}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NightEnemy (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &656781009
 Transform:
   m_ObjectHideFlags: 0
@@ -2051,6 +2052,9 @@ MonoBehaviour:
   attackDuration: 1
   attackCooldown: 1
   attackRange: 2
+  attackMarginFromEntity: 0.5
+  attackDamage: 2
+  maxHealth: 50
 --- !u!61 &656781012
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2342,13 +2346,13 @@ GameObject:
   - component: {fileID: 932075877}
   - component: {fileID: 932075876}
   - component: {fileID: 932075875}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NightEnemy (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &932075874
 Transform:
   m_ObjectHideFlags: 0
@@ -2410,6 +2414,9 @@ MonoBehaviour:
   attackDuration: 1
   attackCooldown: 1
   attackRange: 2
+  attackMarginFromEntity: 0.5
+  attackDamage: 2
+  maxHealth: 50
 --- !u!61 &932075877
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2542,7 +2549,7 @@ GameObject:
   - component: {fileID: 993000874}
   - component: {fileID: 993000873}
   - component: {fileID: 993000872}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NightEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2610,6 +2617,9 @@ MonoBehaviour:
   attackDuration: 1
   attackCooldown: 1
   attackRange: 2
+  attackMarginFromEntity: 0.5
+  attackDamage: 2
+  maxHealth: 50
 --- !u!61 &993000874
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2742,7 +2752,7 @@ GameObject:
   - component: {fileID: 1186629612}
   - component: {fileID: 1186629619}
   - component: {fileID: 1186629618}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3073,13 +3083,13 @@ GameObject:
   - component: {fileID: 1400281588}
   - component: {fileID: 1400281587}
   - component: {fileID: 1400281586}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NightEnemy (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1400281585
 Transform:
   m_ObjectHideFlags: 0
@@ -3141,6 +3151,9 @@ MonoBehaviour:
   attackDuration: 1
   attackCooldown: 1
   attackRange: 2
+  attackMarginFromEntity: 0.5
+  attackDamage: 2
+  maxHealth: 50
 --- !u!61 &1400281588
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3348,13 +3361,13 @@ GameObject:
   - component: {fileID: 1655025160}
   - component: {fileID: 1655025159}
   - component: {fileID: 1655025158}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NightEnemy (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1655025157
 Transform:
   m_ObjectHideFlags: 0
@@ -3416,6 +3429,9 @@ MonoBehaviour:
   attackDuration: 1
   attackCooldown: 1
   attackRange: 2
+  attackMarginFromEntity: 0.5
+  attackDamage: 2
+  maxHealth: 50
 --- !u!61 &1655025160
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -189777,7 +189793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2104572629}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemypack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189819,13 +189835,13 @@ GameObject:
   - component: {fileID: 2142559486}
   - component: {fileID: 2142559485}
   - component: {fileID: 2142559484}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NightEnemy (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2142559483
 Transform:
   m_ObjectHideFlags: 0
@@ -189887,6 +189903,9 @@ MonoBehaviour:
   attackDuration: 1
   attackCooldown: 1
   attackRange: 2
+  attackMarginFromEntity: 0.5
+  attackDamage: 2
+  maxHealth: 50
 --- !u!61 &2142559486
 BoxCollider2D:
   m_ObjectHideFlags: 0

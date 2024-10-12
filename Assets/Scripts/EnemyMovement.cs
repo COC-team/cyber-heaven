@@ -9,15 +9,44 @@ public class NPCMovement : MonoBehaviour
     public float moveSpeed = 2f; // Speed at which the NPC moves
     public float attackDuration = 1f; // Duration of the attack animation
     public float attackCooldown = 1f; // Cooldown before the next attack
-    public float attackRange = 2f; // Range within which to attack the player
+    
+    
+    public float attackRange = 0.5f;
+    public float attackMarginFromEntity = 0.5f;
+    public int attackDamage = 2;
+    
+    public int maxHealth = 50;
+    private int currentHealth;
+    
+    
     private GameObject player; // Reference to the player
 
     private void Start()
     {
         // Find the player in the scene by tag
         player = GameObject.FindGameObjectWithTag("Player");
+        currentHealth = maxHealth;
         // Start the movement coroutine
         StartCoroutine(MoveAndAttack());
+    }
+    
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        Debug.Log("Enemy took damage: " + damage);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("Enemy died!");
+
+        // Можно добавить анимацию смерти или эффект
+        Destroy(gameObject);
     }
 
     private IEnumerator MoveAndAttack()
@@ -25,7 +54,8 @@ public class NPCMovement : MonoBehaviour
         while (true)
         {
             // Check if the player is within attack range
-            if (player != null && Vector2.Distance(transform.position, player.transform.position) <= attackRange)
+            if (player != null && Vector2.Distance(transform.position, player.transform.position) 
+                <= attackRange + attackMarginFromEntity)
             {
                 // Reset animator parameters to stop the movement animation
                 animator.SetFloat("Horizontal", 0);
@@ -42,6 +72,8 @@ public class NPCMovement : MonoBehaviour
                     // Player is to the left
                     animator.SetTrigger("LeftAttack");
                 }
+
+                player.GetComponent<PlayerMovement>().TakeDamage(attackDamage);
 
                 yield return new WaitForSeconds(attackDuration); // Wait for attack animation to complete
 
@@ -64,7 +96,7 @@ public class NPCMovement : MonoBehaviour
             
                 // Ensure the NPC moves with the random variation
                 transform.position += (Vector3)randomizedDirection * moveSpeed * Time.deltaTime;
-
+                
                 // Wait for a short period before moving again
                 yield return null; // Continue until the next frame
             }

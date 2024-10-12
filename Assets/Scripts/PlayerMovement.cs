@@ -7,16 +7,24 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
 
+    
+    public float attackDuration = 1f; // Duration of the attack animation
+    public float attackCooldown = 1f; // Cooldown before the next attack
+    private float lastAttackFinish = 0f;
     public float attackRange = 0.5f;
-    public float attackMarginFromPlayer = 0.5f;
+    public float attackMarginFromEntity = 0.5f;
     public int attackDamage = 2;
     public Transform attackPoint;
     public LayerMask enemyLayers;
+    
+    public int maxHealth = 50;
+    private int currentHealth;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         attackPoint = new GameObject().transform;
+        currentHealth = maxHealth;
     }
 
     void Update()
@@ -38,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             movement = movement.normalized;
         }
         
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackFinish)
         {
             Debug.Log("Attack");
             Attack();
@@ -55,8 +63,29 @@ public class PlayerMovement : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("HIT");
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            enemy.GetComponent<NPCMovement>().TakeDamage(attackDamage);
         }
+
+        lastAttackFinish = Time.time + attackDuration + attackCooldown;
+    }
+    
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        Debug.Log("Player took damage: " + damage);
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("Player died!");
+
+        // Можно добавить анимацию смерти или эффект
+        // Destroy(gameObject);
     }
     
     void OnDrawGizmosSelected()
@@ -77,6 +106,6 @@ public class PlayerMovement : MonoBehaviour
         mousePosition.z = 0;
         Vector3 rb3 = new Vector3(rb.position.x, rb.position.y);
         Vector3 direction = (mousePosition - rb3).normalized;
-        attackPoint.position = rb3 + direction * attackMarginFromPlayer;
+        attackPoint.position = rb3 + direction * attackMarginFromEntity;
     }
 }
