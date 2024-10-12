@@ -6,6 +6,7 @@ public class NPCMovement : MonoBehaviour
     public Animator animator;
     public float moveDistance = 2f; // Total distance to move in 2 seconds
     public float moveDuration = 1f;  // Time duration for the movement
+    public float moveSpeed = 2f; // Speed at which the NPC moves
     public float attackDuration = 1f; // Duration of the attack animation
     public float attackCooldown = 1f; // Cooldown before the next attack
     public float attackRange = 2f; // Range within which to attack the player
@@ -26,6 +27,10 @@ public class NPCMovement : MonoBehaviour
             // Check if the player is within attack range
             if (player != null && Vector2.Distance(transform.position, player.transform.position) <= attackRange)
             {
+                // Reset animator parameters to stop the movement animation
+                animator.SetFloat("Horizontal", 0);
+                animator.SetFloat("Vertical", 0);
+                
                 // Determine if the player is to the left or right
                 if (player.transform.position.x > transform.position.x)
                 {
@@ -40,43 +45,24 @@ public class NPCMovement : MonoBehaviour
 
                 yield return new WaitForSeconds(attackDuration); // Wait for attack animation to complete
 
-                // Cooldown before moving again
-                yield return new WaitForSeconds(attackCooldown);
+                // // Cooldown before moving again
+                // yield return new WaitForSeconds(attackCooldown);
             }
             else
             {
-                // Get a random direction to move
+                // Move towards the player
                 animator.SetTrigger("StopAttack");
-                Vector2 randomDirection = GetRandomDirection();
+                Vector2 direction = (player.transform.position - transform.position).normalized;
 
-                // Set animator parameters based on the random direction
-                animator.SetFloat("Horizontal", randomDirection.x);
-                animator.SetFloat("Vertical", randomDirection.y);
-
-                // Calculate the target position
-                Vector2 targetPosition = (Vector2)transform.position + randomDirection * moveDistance;
-
-                // Store the starting position
-                Vector2 startPosition = transform.position;
-
-                // Move towards the target position over the specified duration
-                float elapsedTime = 0f;
-                while (elapsedTime < moveDuration)
-                {
-                    transform.position = Vector2.Lerp(startPosition, targetPosition, elapsedTime / moveDuration);
-                    elapsedTime += Time.deltaTime;
-                    yield return null; // Wait for the next frame
-                }
-
+                // Set animator parameters to reflect movement
+                animator.SetFloat("Horizontal", direction.x);
+                animator.SetFloat("Vertical", direction.y);
+                
                 // Ensure the NPC ends up at the target position
-                transform.position = targetPosition;
-
-                // Reset animator parameters to stop the movement animation
-                animator.SetFloat("Horizontal", 0);
-                animator.SetFloat("Vertical", 0);
+                transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
 
                 // Wait for a short period before moving again
-                yield return new WaitForSeconds(0.1f); // Optional pause between movements
+                yield return null; // Continue until the next frame
             }
         }
     }
