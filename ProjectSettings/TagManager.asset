@@ -50,6 +50,12 @@ TagManager:
   - name: objects
     uniqueID: 107516963
     locked: 0
+  - name: npc
+    uniqueID: 84798383
+    locked: 0
+  - name: enemies
+    uniqueID: 1175724259
+    locked: 0
   - name: player
     uniqueID: 475217347
     locked: 0

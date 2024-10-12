@@ -1,0 +1,742 @@
+fileFormatVersion: 2
+guid: 2d6a901d537506d4393a8b2b63e5b84e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BossWalkRight12
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 480
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05b1c85aceca0644aa9abe198137b8d2
+      internalID: 1209206070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossWalkRight11
+      rect:
+        serializedVersion: 2
+        x: 3168
+        y: 480
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c1315623a68fcb499408008a2ac32e9
+      internalID: -1362280669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossWalkRight10
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 480
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5dabceb629f7a741a50e9004944fc05
+      internalID: -751672615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossWalkRight9
+      rect:
+        serializedVersion: 2
+        x: 3744
+        y: 480
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5059fb46371235f4e97874289f279cd9
+      internalID: -2080982659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossWalkRight8
+      rect:
+        serializedVersion: 2
+        x: 4032
+        y: 480
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d686c76df95712c4fb69b0023597c244
+      internalID: -1947874178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossWalkRight7
+      rect:
+        serializedVersion: 2
+        x: 4320
+        y: 479
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 167f24790607ee74ba4aa38e7558c525
+      internalID: -825991219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossWalkRight6
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 480
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2857770e7cae4844c8fd71a0b545b426
+      internalID: -678895638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossWalkRight5
+      rect:
+        serializedVersion: 2
+        x: 4896
+        y: 480
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d083126910520b24ba2b9ad8c3d65635
+      internalID: -70933253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossWalkRight4
+      rect:
+        serializedVersion: 2
+        x: 5184
+        y: 480
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93e10154a747fd64dad8f1a9e7dbaf3c
+      internalID: -4602664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossWalkRight3
+      rect:
+        serializedVersion: 2
+        x: 5472
+        y: 480
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07f40a945b681eb40a4bb4a2618cc771
+      internalID: 221092731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossWalkRight2
+      rect:
+        serializedVersion: 2
+        x: 5760
+        y: 480
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edf4d88e5c9c75b42a68150d7826307e
+      internalID: 805996486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossWalkRight1
+      rect:
+        serializedVersion: 2
+        x: 6048
+        y: 480
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 855d73200fa3327488e683daaa82d81d
+      internalID: 489290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight15
+      rect:
+        serializedVersion: 2
+        x: 2016
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b5ce3dcf2b35234cbd2b4be75f3e1d3
+      internalID: -2053075005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight14
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71dcba5e05f7f344c9e5eb15cea38310
+      internalID: 1885973547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight13
+      rect:
+        serializedVersion: 2
+        x: 2592
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37003c26394662c46b76dd70ae7a4e6d
+      internalID: -656707664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight12
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e28ba8ec5490ac3409fd0130e11616c8
+      internalID: -699393243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight11
+      rect:
+        serializedVersion: 2
+        x: 3168
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 934ff9b857e655649a5329df2d91133f
+      internalID: 173268855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight10
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f06f71c0e8fa5f4eb1f62a451427ec7
+      internalID: -1823730670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight9
+      rect:
+        serializedVersion: 2
+        x: 3744
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75b4bb0069742b0459be8306f2bde64e
+      internalID: 2147282675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight8
+      rect:
+        serializedVersion: 2
+        x: 4032
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6dc0a4bedd631b14789820c32a5057a1
+      internalID: 384023554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight7
+      rect:
+        serializedVersion: 2
+        x: 4320
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e94dab5685e3a44897de7be58aaa70a
+      internalID: 868065026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight6
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 071064510a7ba6a4499daa0e468de990
+      internalID: -1752336112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight5
+      rect:
+        serializedVersion: 2
+        x: 4896
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a36fb382d94674e46b140f3abcaf4576
+      internalID: 1987181530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight4
+      rect:
+        serializedVersion: 2
+        x: 5184
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b41819b09ee55e34a94fc539d26bb339
+      internalID: -394613687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight3
+      rect:
+        serializedVersion: 2
+        x: 5472
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9888451d37620904285cdcb4ef29f24a
+      internalID: -708030302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight2
+      rect:
+        serializedVersion: 2
+        x: 5760
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86355a2dfa6c11a40ae972fc89d31e5a
+      internalID: 1950025671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossHitRight1
+      rect:
+        serializedVersion: 2
+        x: 6048
+        y: 320
+        width: 288
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4fe39ace2f3eba40a108c57845bac90
+      internalID: 687452445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      BossHitRight1: 687452445
+      BossHitRight10: -1823730670
+      BossHitRight11: 173268855
+      BossHitRight12: -699393243
+      BossHitRight13: -656707664
+      BossHitRight14: 1885973547
+      BossHitRight15: -2053075005
+      BossHitRight2: 1950025671
+      BossHitRight3: -708030302
+      BossHitRight4: -394613687
+      BossHitRight5: 1987181530
+      BossHitRight6: -1752336112
+      BossHitRight7: 868065026
+      BossHitRight8: 384023554
+      BossHitRight9: 2147282675
+      BossWalkRight1: 489290
+      BossWalkRight10: -751672615
+      BossWalkRight11: -1362280669
+      BossWalkRight12: 1209206070
+      BossWalkRight2: 805996486
+      BossWalkRight3: 221092731
+      BossWalkRight4: -4602664
+      BossWalkRight5: -70933253
+      BossWalkRight6: -678895638
+      BossWalkRight7: -825991219
+      BossWalkRight8: -1947874178
+      BossWalkRight9: -2080982659
+      output-onlinepngtools_0: -1222956433
+      output-onlinepngtools_1: -215034362
+      output-onlinepngtools_2: 752408037
+      output-onlinepngtools_3: 1370097723
+      output-onlinepngtools_33: -1174398101
+      output-onlinepngtools_34: -943623428
+      output-onlinepngtools_35: -1866182384
+      output-onlinepngtools_36: -573751253
+      output-onlinepngtools_37: -443263129
+      output-onlinepngtools_38: -464960412
+      output-onlinepngtools_39: 1586317752
+      output-onlinepngtools_4: -1071312057
+      output-onlinepngtools_40: -777566157
+      output-onlinepngtools_41: -1423407915
+      output-onlinepngtools_42: -1178764478
+      output-onlinepngtools_43: 258629364
+      output-onlinepngtools_44: -58418551
+      output-onlinepngtools_45: -1980829269
+      output-onlinepngtools_46: 1332926722
+      output-onlinepngtools_47: -1498063885
+      output-onlinepngtools_48: -574412553
+      output-onlinepngtools_49: 1778487668
+      output-onlinepngtools_5: 1180537930
+      output-onlinepngtools_50: -501217032
+      output-onlinepngtools_51: 1085023119
+      output-onlinepngtools_52: 803576024
+      output-onlinepngtools_53: 1366451275
+      output-onlinepngtools_54: 1941905184
+      output-onlinepngtools_55: -704153079
+      output-onlinepngtools_56: -1303487012
+      output-onlinepngtools_57: 1189342748
+      output-onlinepngtools_58: 1108283713
+      output-onlinepngtools_59: 1703770442
+      output-onlinepngtools_60: 986861031
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
