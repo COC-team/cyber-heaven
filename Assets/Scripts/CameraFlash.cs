@@ -7,6 +7,7 @@ public class CameraFlash : MonoBehaviour
 {
     public Image flashImage; // Assign the UI Image here in the Inspector
     public TextMeshProUGUI flashText; // Assign the TextMeshProUGUI text here in the Inspector
+	public GameObject player;
     public float flashDuration = 0.5f; // Duration of the flash
 
     void Update()
@@ -15,6 +16,14 @@ public class CameraFlash : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
         {
             StartCoroutine(FlashRed());
+			if (player != null)
+        	{
+            	player.GetComponent<PlayerHealth>().TakeDamage(10);
+        	}
+        	else
+        	{
+            	Debug.LogError("Player GameObject is not assigned!");
+        	}
         }
     }
 
