@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Attack");
+			animator.SetTrigger("Attack");
             Attack();
         }
     }
