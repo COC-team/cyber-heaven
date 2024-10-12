@@ -54,12 +54,16 @@ public class NPCMovement : MonoBehaviour
                 animator.SetTrigger("StopAttack");
                 Vector2 direction = (player.transform.position - transform.position).normalized;
 
-                // Set animator parameters to reflect movement
-                animator.SetFloat("Horizontal", direction.x);
-                animator.SetFloat("Vertical", direction.y);
-                
-                // Ensure the NPC ends up at the target position
-                transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
+                // Add random offset to the movement direction
+                Vector2 randomOffset = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
+                Vector2 randomizedDirection = (direction + randomOffset).normalized;
+
+                // Set animator parameters to reflect movement with randomized direction
+                animator.SetFloat("Horizontal", randomizedDirection.x);
+                animator.SetFloat("Vertical", randomizedDirection.y);
+            
+                // Ensure the NPC moves with the random variation
+                transform.position += (Vector3)randomizedDirection * moveSpeed * Time.deltaTime;
 
                 // Wait for a short period before moving again
                 yield return null; // Continue until the next frame
