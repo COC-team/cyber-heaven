@@ -7,7 +7,7 @@ public class EnemyAnimationHandler : MonoBehaviour
     public Transform spawnPoint;      // Position where the object should be spawned
 
     // Additional offset to shift the spawn position to the right
-    public Vector2 rightOffset = new Vector2(100f, -200f); // Adjust this value as needed
+    public Vector2 rightOffset = new Vector2(3, -2); // Adjust this value as needed
 
     // This method will be called by the animation event
     public void SpawnObject()
@@ -50,7 +50,7 @@ public class EnemyAnimationHandler : MonoBehaviour
         float elapsedTime = 0f;
 
         // Calculate the target position (50% distance)
-        Vector3 targetPosition = obj.transform.position + new Vector3(direction.x, direction.y, 0); // Move 1.5 units diagonally
+        Vector3 targetPosition = obj.transform.position + new Vector3(direction.x, direction.y, 0); // Move diagonally
 
         while (elapsedTime < duration)
         {
@@ -68,6 +68,7 @@ public class EnemyAnimationHandler : MonoBehaviour
         obj.transform.position = targetPosition;
 
         // Destroy the object after it has moved
+        Debug.Log($"Destroying object: {obj.name}"); // Debug log before destruction
         Destroy(obj);
     }
 }

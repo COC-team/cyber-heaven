@@ -2639,6 +2639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 633222155}
   spawnPoint: {fileID: 1186629617}
+  rightOffset: {x: 3, y: -2}
 --- !u!1 &1378766569
 GameObject:
   m_ObjectHideFlags: 0
