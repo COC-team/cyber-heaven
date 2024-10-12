@@ -8,10 +8,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Menu Background
+  - 
   - Water
   - UI
-  - Logo
+  - 
   - 
   - 
   - 
@@ -41,12 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
-    uniqueID: 1231318615
+  - name: background
+    uniqueID: 1437996215
     locked: 0
-  - name: Foreground
-    uniqueID: 1058415709
+  - name: tiles
+    uniqueID: 2446671975
     locked: 0
-  - name: UI
-    uniqueID: 1604158353
+  - name: objects
+    uniqueID: 107516963
+    locked: 0
+  - name: player
+    uniqueID: 475217347
     locked: 0

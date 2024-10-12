@@ -63,6 +63,19 @@
         },
         {
             "userAdded": false,
+            "type": "UnityEngine.PhysicsMaterial",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+<<<<<<< HEAD
+=======
+            "type": "UnityEngine.PhysicsMaterial",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+>>>>>>> main
             "type": "UnityEngine.PhysicsMaterial2D",
             "defaultInstantiationMode": 0
         },
