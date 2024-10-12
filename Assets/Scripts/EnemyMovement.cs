@@ -11,6 +11,7 @@ public class NPCMovement : MonoBehaviour
     public float attackCooldown = 1f; // Cooldown before the next attack
     
     
+    public float knockbackForce = 0.5f;
     public float attackRange = 0.5f;
     public float attackMarginFromEntity = 0.5f;
     public int attackDamage = 2;
@@ -20,11 +21,13 @@ public class NPCMovement : MonoBehaviour
     
     
     private GameObject player; // Reference to the player
+    //private Rigidbody2D rb;
 
     private void Start()
     {
         // Find the player in the scene by tag
         player = GameObject.FindGameObjectWithTag("Player");
+        //rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         // Start the movement coroutine
         StartCoroutine(MoveAndAttack());
@@ -39,6 +42,11 @@ public class NPCMovement : MonoBehaviour
         {
             Die();
         }
+    }
+    
+    public void GetKnockback(float force, Vector3 forceDirection)
+    {
+        transform.position += forceDirection * force;
     }
 
     void Die()
@@ -72,10 +80,13 @@ public class NPCMovement : MonoBehaviour
                     // Player is to the left
                     animator.SetTrigger("LeftAttack");
                 }
+                
+                Vector3 direction = (Vector3) (player.transform.position - transform.position).normalized;
 
                 player.GetComponent<PlayerMovement>().TakeDamage(attackDamage);
+                player.GetComponent<PlayerMovement>().GetKnockback(knockbackForce, direction);
 
-                yield return new WaitForSeconds(attackDuration); // Wait for attack animation to complete
+                yield return new WaitForSeconds(attackDuration + attackCooldown); // Wait for attack animation to complete
 
                 // // Cooldown before moving again
                 // yield return new WaitForSeconds(attackCooldown);

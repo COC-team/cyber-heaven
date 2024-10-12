@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,9 +15,12 @@ public class PlayerMovement : MonoBehaviour
     public float attackRange = 0.5f;
     public float attackMarginFromEntity = 0.5f;
     public int attackDamage = 2;
+    public float knockbackForce = 0.5f;
+    private Vector3 knockbackDirection = Vector3.zero;
     public Transform attackPoint;
     public LayerMask enemyLayers;
     
+    public Slider healthBar;
     public int maxHealth = 50;
     private int currentHealth;
 
@@ -25,6 +29,11 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         attackPoint = new GameObject().transform;
         currentHealth = maxHealth;
+        if (healthBar != null)
+        {
+            healthBar.maxValue = maxHealth;
+            healthBar.value = currentHealth;
+        }
     }
 
     void Update()
@@ -64,15 +73,44 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("HIT");
             enemy.GetComponent<NPCMovement>().TakeDamage(attackDamage);
+            enemy.GetComponent<NPCMovement>().GetKnockback(knockbackForce, knockbackDirection);
         }
 
         lastAttackFinish = Time.time + attackDuration + attackCooldown;
     }
     
+    public void Heal(int healAmount)
+    {
+        currentHealth += healAmount;
+
+        // Clamp the health to avoid exceeding max health
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        // Optional: Update the health bar
+        if (healthBar != null)
+        {
+            healthBar.value = currentHealth;
+        }
+    }
+    
+    public void GetKnockback(float force, Vector3 forceDirection)
+    {
+        Debug.Log("Player coords" + rb.position);
+        // updateMovementAndAttack(newPosition);
+        transform.position += forceDirection * knockbackForce;
+        Debug.Log("Player coords" + rb.position);
+    }
+    
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         Debug.Log("Player took damage: " + damage);
+        
+        if (healthBar != null)
+        {
+            healthBar.value = currentHealth;
+        }
 
         if (currentHealth <= 0)
         {
@@ -99,13 +137,20 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector2 newPosition = rb.position + movement * moveSpeed * Time.fixedDeltaTime;
+        updateMovementAndAttack(newPosition);
+    }
+
+    void updateMovementAndAttack(Vector2 newPosition)
+    {
         // Apply the movement to the Rigidbody2D
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(newPosition);
         
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
         Vector3 rb3 = new Vector3(rb.position.x, rb.position.y);
         Vector3 direction = (mousePosition - rb3).normalized;
+        knockbackDirection = direction;
         attackPoint.position = rb3 + direction * attackMarginFromEntity;
     }
 }

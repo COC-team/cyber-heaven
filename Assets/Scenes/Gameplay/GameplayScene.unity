@@ -245,7 +245,6 @@ GameObject:
   - component: {fileID: 183284552}
   - component: {fileID: 183284555}
   - component: {fileID: 183284557}
-  - component: {fileID: 183284558}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -427,29 +426,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 183284555}
   moveSpeed: 3
+  attackDuration: 1
+  attackCooldown: 0.5
   attackRange: 0.5
   attackMarginFromEntity: 0.5
   attackDamage: 2
+  knockbackForce: 0.5
   attackPoint: {fileID: 0}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
-  maxHealth: 50
---- !u!114 &183284558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 183284546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c24f42a07543b114ca5265547adc06be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
   healthBar: {fileID: 522464300}
+  maxHealth: 50
 --- !u!1 &289943311
 GameObject:
   m_ObjectHideFlags: 0
