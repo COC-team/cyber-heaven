@@ -36,10 +36,7 @@ public class SphereTeleport : MonoBehaviour
     void Update()
     {
         // Activate teleportation when the 'T' key is pressed
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            ActivateBossFight();
-        }
+        
     }
 
     void ActivateTeleportation()
