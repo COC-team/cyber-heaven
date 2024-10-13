@@ -5,12 +5,12 @@ public class HeneDialogueManager : MonoBehaviour
 {
     private int dialogueCount = 0;
     public GameObject enemyPrefab; // Prefab of the new enemy to spawn
-    private bool[] ids = new bool[8];
+    private bool[] ids = new bool[9];
 
     // This function is called by the NPC script to increment the count
     public void IncrementDialogueCount(int id)
     {
-        if (!ids[id])
+        if (!ids[id] && id != 0)
         {
             dialogueCount++;
             Debug.Log("Dialogue count: " + dialogueCount);
