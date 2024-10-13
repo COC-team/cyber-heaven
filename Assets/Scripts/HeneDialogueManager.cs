@@ -5,6 +5,7 @@ public class HeneDialogueManager : MonoBehaviour
 {
     public List<CurrentNpcDialogue> npcDialogues;
     private int completedDialogueCount = 0;
+    public GameObject enemyPrefab; // Prefab of the new enemy to spawn
 
     private void OnEnable()
     {
@@ -28,7 +29,25 @@ public class HeneDialogueManager : MonoBehaviour
 
     private void TriggerFinalEvent()
     {
-        Debug.Log("All NPC dialogues completed. Triggering the final event!");
-        // logic here
+        foreach (string targetName in new List<string> { "Anna", "Dima", "Margarita", "Mark", "Martin" })
+        {
+            // Find all objects with the specified name
+            GameObject[] targetObjects = GameObject.FindObjectsOfType<GameObject>();
+            
+            foreach (GameObject targetObject in targetObjects)
+            {
+                if (targetObject.name == targetName)
+                {
+                    // Hide the object by disabling it
+                    targetObject.SetActive(false);
+
+                    // Get the position of the hidden object
+                    Vector3 spawnPosition = targetObject.transform.position;
+
+                    // Spawn a new enemy at the hidden object's position
+                    Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                }
+            }
+        }
     }
 }
