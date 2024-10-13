@@ -3,32 +3,27 @@ using UnityEngine;
 
 public class HeneDialogueManager : MonoBehaviour
 {
-    public List<CurrentNpcDialogue> npcDialogues;
-    private int completedDialogueCount = 0;
+    private int dialogueCount = 0;
+    private const int maxDialogueCount = 16;  // Set the count required to trigger the final event
     public GameObject enemyPrefab; // Prefab of the new enemy to spawn
 
-    private void OnEnable()
+    // This function is called by the NPC script to increment the count
+    public void IncrementDialogueCount()
     {
-        CurrentNpcDialogue.OnNPCDialogueComplete += CheckDialogueCompletion;
-    }
+        dialogueCount++;
+        Debug.Log("Dialogue count: " + dialogueCount);
 
-    private void OnDisable()
-    {
-        CurrentNpcDialogue.OnNPCDialogueComplete -= CheckDialogueCompletion;
-    }
-
-    private void CheckDialogueCompletion()
-    {
-        completedDialogueCount++;
-        Debug.Log(completedDialogueCount);
-        if (completedDialogueCount == 7)
+        if (dialogueCount >= maxDialogueCount)
         {
-            TriggerFinalEvent();
+            TriggerFinalFight();
         }
     }
 
-    private void TriggerFinalEvent()
+    // Trigger the final fight or event
+    private void TriggerFinalFight()
     {
+        Debug.Log("All dialogues completed! Triggering the final fight!");
+        // Add logic for the final boss fight here
         foreach (string targetName in new List<string> { "Anna", "Dima", "Margarita", "Mark", "Martin" })
         {
             // Find all objects with the specified name
