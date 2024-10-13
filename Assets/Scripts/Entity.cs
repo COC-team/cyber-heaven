@@ -259,6 +259,7 @@ public class Entity : MonoBehaviour
     {
         Debug.Log("Entity died!");
         animator.SetTrigger("Death");
+        movement = Vector2.zero;
         if (isBot)
         {
             Destroy(gameObject);
@@ -274,6 +275,11 @@ public class Entity : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!isAlive)
+        {
+            return;
+        }
+        
         if (isBot && !animator.GetBool("RightAttack") && !animator.GetBool("LeftAttack") 
         || !isBot && !animator.GetBool("Attack"))
         {
