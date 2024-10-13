@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Entity : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class Entity : MonoBehaviour
 
     private float attackStartTime = 0f;
     private bool isAttacking = false;
+    
+    private bool isKnockedBack = false;
+    public float knockbackForce = 20f;
+    private static float knockbackDuration = 0.2f;
+    
     public float attackDuration = 1f; // Duration of the attack animation
     public float attackCooldown = 1f; // Cooldown before the next attack
     private float lastAttackFinish = 0f;
@@ -178,6 +184,8 @@ public class Entity : MonoBehaviour
         {
             Debug.Log("BOT HIT");
             player.GetComponent<Entity>().TakeDamage(attackDamage);
+            Vector2 knockbackDirection = player.GetComponent<Rigidbody2D>().position - rb.position;
+            player.GetComponent<Entity>().GetKnockback(knockbackForce, knockbackDirection);
         }
         else
         {
@@ -187,11 +195,35 @@ public class Entity : MonoBehaviour
             {
                 Debug.Log("HIT");
                 enemy.GetComponent<Entity>().TakeDamage(attackDamage);
+                Vector2 knockbackDirection = enemy.GetComponent<Rigidbody2D>().position - rb.position;
+                enemy.GetComponent<Entity>().GetKnockback(knockbackForce, knockbackDirection);
                 // enemy.GetComponent<NPCMovement>().GetKnockback(knockbackForce, knockbackDirection);
             }
         }
 
         lastAttackFinish = Time.time;
+    }
+
+    public void GetKnockback(float force, Vector2 knockbackDirection)
+    {
+        if (!isKnockedBack)
+        {
+            isKnockedBack = true;
+            rb.velocity = Vector2.zero; // Reset velocity before applying knockback
+
+            // Apply the force in the opposite direction of the hit
+            rb.AddForce(knockbackDirection.normalized * force, ForceMode2D.Impulse);
+
+            // Optionally disable controls/movement during knockback
+            StartCoroutine(KnockbackCoroutine());
+        }
+    }
+    
+    // Coroutine to handle the knockback duration
+    private IEnumerator KnockbackCoroutine()
+    {
+        yield return new WaitForSeconds(knockbackDuration);
+        isKnockedBack = false; // Allow movement again after knockback duration
     }
     
     public void Heal(int healAmount)
@@ -255,14 +287,6 @@ public class Entity : MonoBehaviour
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);
             rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-            
-            Vector3 rb3 = new Vector3(rb.position.x, rb.position.y);
-            Vector3 direction = (attackDirection - rb3).normalized;
-            attackPoint.position = rb3 + direction * attackMarginFromEntity;
-            if (!isBot)
-            {
-                aim.GetComponent<Transform>().position = attackPoint.position;
-            }
         }
         else
         {
@@ -271,6 +295,13 @@ public class Entity : MonoBehaviour
                 ApplyDamage();
                 isAttacking = false;
             }
+        }
+        Vector3 rb3 = new Vector3(rb.position.x, rb.position.y);
+        Vector3 direction = (attackDirection - rb3).normalized;
+        attackPoint.position = rb3 + direction * attackMarginFromEntity;
+        if (!isBot)
+        {
+            aim.GetComponent<Transform>().position = attackPoint.position;
         }
     }
     
