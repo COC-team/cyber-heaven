@@ -8,10 +8,10 @@ public class FinalSceneChanger : MonoBehaviour
     public string sceneName;
 
     void Start() {
-//        GameObject persistentObject = GameObject.FindWithTag("BG_music");
-//        if (persistentObject != null) {
-//            Destroy(persistentObject); // Destroy it in the new scene
-//        }
+        GameObject persistentObject = GameObject.FindWithTag("BG_music");
+        if (persistentObject != null) {
+            Destroy(persistentObject); // Destroy it in the new scene
+        }
     }
     
     // Update is called once per frame
