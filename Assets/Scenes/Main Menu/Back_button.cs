@@ -3,22 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class Back_button : MonoBehaviour
 {
-    public void PlayGame()
-    {
-        SceneManager.LoadScene("GameplayScene");
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
     
-    
-    public void Options()
+    public void MainMenu()
     {
-        SceneManager.LoadScene("Options Scene");
+        SceneManager.LoadScene("Main menu 2");
     }
     
     // Start is called before the first frame update
@@ -26,8 +16,6 @@ public class MainMenu : MonoBehaviour
     {
         
     }
-    
-    
 
     // Update is called once per frame
     void Update()

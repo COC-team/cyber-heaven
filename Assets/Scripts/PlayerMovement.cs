@@ -38,6 +38,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
+		if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackFinish)
+        {
+            Debug.Log("Attack");
+			animator.SetTrigger("Attack");
+            Attack();
+        }		
+
         // Get input
         float horizontal = Input.GetAxisRaw("Horizontal"); // A (-1) and D (1)
         float vertical = Input.GetAxisRaw("Vertical");     // W (1) and S (-1)
@@ -53,12 +61,6 @@ public class PlayerMovement : MonoBehaviour
         if (movement.sqrMagnitude > 1)
         {
             movement = movement.normalized;
-        }
-        
-        if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackFinish)
-        {
-            Debug.Log("Attack");
-            Attack();
         }
     }
 
