@@ -14,6 +14,12 @@ public class SphereTeleport : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Boss");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponent<Entity>().SetActive(false);
+        }
+        
         // Initialize predefined teleport points (example coordinates)
         teleportPoints[0] = new Vector2(32f, 10f);
         teleportPoints[1] = new Vector2(40f, 5f);
@@ -32,7 +38,7 @@ public class SphereTeleport : MonoBehaviour
         // Activate teleportation when the 'T' key is pressed
         if (Input.GetKeyDown(KeyCode.T))
         {
-            ActivateTeleportation();
+            ActivateBossFight();
         }
     }
 
@@ -65,10 +71,22 @@ public class SphereTeleport : MonoBehaviour
     // Detect collision with player and deal damage
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if the object we collided with has the "Player" tag
+        Debug.Log("Sphere Collision with " + collision.gameObject.name);
+
         if (collision.gameObject.CompareTag("Player"))
         {
-            // TODO: Deal damage to the player
+            int damageAmount = 5; // Set your damage amount here
+            collision.gameObject.GetComponent<Entity>().TakeDamage(damageAmount);
         }
+    }
+    
+    public void ActivateBossFight()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Boss");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponent<Entity>().SetActive(true);
+        }
+        ActivateTeleportation();
     }
 }

@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Entity : MonoBehaviour
 {
     public bool isBot = true;
+    public GameObject aim;
     public bool isAlive = true;
+    public bool isActive = true;
     private GameObject player;
     private Rigidbody2D rb;
     public Animator animator;
@@ -13,6 +16,13 @@ public class Entity : MonoBehaviour
     private int currentHealth;
 
 
+    private float attackStartTime = 0f;
+    private bool isAttacking = false;
+    
+    private bool isKnockedBack = false;
+    public float knockbackForce = 20f;
+    private static float knockbackDuration = 0.2f;
+    
     public float attackDuration = 1f; // Duration of the attack animation
     public float attackCooldown = 1f; // Cooldown before the next attack
     private float lastAttackFinish = 0f;
@@ -32,6 +42,7 @@ public class Entity : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         attackPoint = new GameObject().transform;
+        aim = GameObject.FindGameObjectWithTag("aim");
         currentHealth = maxHealth;
         if (healthBar != null)
         {
@@ -48,7 +59,7 @@ public class Entity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isAlive)
+        if (!isAlive || !isActive)
         {
             return;
         }
@@ -76,14 +87,9 @@ public class Entity : MonoBehaviour
                 
                 Vector3 direction = (Vector3) (player.transform.position - transform.position).normalized;
 
-                //player.GetComponent<Entity>().TakeDamage(attackDamage);
                 //player.GetComponent<PlayerMovement>().GetKnockback(knockbackForce, direction);
 
                 Attack();
-                //WaitForSeconds(attackDuration + attackCooldown); // Wait for attack animation to complete
-
-                // // Cooldown before moving again
-                // yield return new WaitForSeconds(attackCooldown);
             }
             else if (player != null)
             {
@@ -116,15 +122,6 @@ public class Entity : MonoBehaviour
                     Vector2 randomizedDirection = (direction + randomOffset).normalized;
                     movement = randomizedDirection;
                 }
-                
-                // Set animator parameters to reflect movement with randomized direction
-                //animator.SetFloat("Horizontal", randomizedDirection.x);
-                //animator.SetFloat("Vertical", randomizedDirection.y);
-            
-                // Ensure the NPC moves with the random variation
-                //transform.position += (Vector3)randomizedDirection * moveSpeed * Time.deltaTime;
-                
-                // Wait for a short period before moving again
             }
         }
         else
@@ -166,47 +163,30 @@ public class Entity : MonoBehaviour
         }
     }
     
-    void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-            return;
-        
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
-
     void Attack()
     {
                     // && !animator.GetBool("RightAttack") && !animator.GetBool("LeftAttack")
-        if (isBot
-        || !isBot && !animator.GetBool("Attack"))
+        if (!isAttacking)
         {
             if (lastAttackFinish + attackCooldown <= Time.time)
             {
                 Debug.Log("ATTACK");
-                animator.SetTrigger("Attack");
-                // Temporarily
-                ApplyDamage();
+                if (!isBot)
+                    animator.SetTrigger("Attack");
+                isAttacking = true;
+                attackStartTime = Time.time;
             }
         }
-        //if (!animator.GetBool("Attack") && lastAttackFinish + attackCooldown <= Time.time)
-        //{
-            //Debug.Log("ATTACK");
-            //animator.SetTrigger("Attack");
-            // Temporarily
-            //ApplyDamage();
-        //}
     }
 
     void ApplyDamage()
     {
-        // Vector3 rb3 = new Vector3(rb.position.x, rb.position.y);
-        
-        // animator.setTrigger("attack");
         if (isBot)
         {
             Debug.Log("BOT HIT");
             player.GetComponent<Entity>().TakeDamage(attackDamage);
+            Vector2 knockbackDirection = player.GetComponent<Rigidbody2D>().position - rb.position;
+            player.GetComponent<Entity>().GetKnockback(knockbackForce, knockbackDirection);
         }
         else
         {
@@ -216,11 +196,35 @@ public class Entity : MonoBehaviour
             {
                 Debug.Log("HIT");
                 enemy.GetComponent<Entity>().TakeDamage(attackDamage);
+                Vector2 knockbackDirection = enemy.GetComponent<Rigidbody2D>().position - rb.position;
+                enemy.GetComponent<Entity>().GetKnockback(knockbackForce, knockbackDirection);
                 // enemy.GetComponent<NPCMovement>().GetKnockback(knockbackForce, knockbackDirection);
             }
         }
 
         lastAttackFinish = Time.time;
+    }
+
+    public void GetKnockback(float force, Vector2 knockbackDirection)
+    {
+        if (!isKnockedBack)
+        {
+            isKnockedBack = true;
+            rb.velocity = Vector2.zero; // Reset velocity before applying knockback
+
+            // Apply the force in the opposite direction of the hit
+            rb.AddForce(knockbackDirection.normalized * force, ForceMode2D.Impulse);
+
+            // Optionally disable controls/movement during knockback
+            StartCoroutine(KnockbackCoroutine());
+        }
+    }
+    
+    // Coroutine to handle the knockback duration
+    private IEnumerator KnockbackCoroutine()
+    {
+        yield return new WaitForSeconds(knockbackDuration);
+        isKnockedBack = false; // Allow movement again after knockback duration
     }
     
     public void Heal(int healAmount)
@@ -259,6 +263,7 @@ public class Entity : MonoBehaviour
     {
         Debug.Log("Entity died!");
         animator.SetTrigger("Death");
+        movement = Vector2.zero;
         if (isBot)
         {
             Destroy(gameObject);
@@ -274,25 +279,31 @@ public class Entity : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isBot && !animator.GetBool("RightAttack") && !animator.GetBool("LeftAttack") 
-        || !isBot && !animator.GetBool("Attack"))
+        if (!isAlive || !isActive)
+        {
+            return;
+        }
+        if (!isAttacking)
         {
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);
             rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-            
-            Vector3 rb3 = new Vector3(rb.position.x, rb.position.y);
-            Vector3 direction = (attackDirection - rb3).normalized;
-            attackPoint.position = rb3 + direction * attackMarginFromEntity;
         }
-    }
-
-    bool isPlaying(string animationName)
-    {
-        if (animator == null)
-            return false;
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(entityLayer.value); // 0 is the layer index
-        return stateInfo.IsName(animationName);
+        else
+        {
+            if (attackStartTime + attackDuration <= Time.time)
+            {
+                ApplyDamage();
+                isAttacking = false;
+            }
+        }
+        Vector3 rb3 = new Vector3(rb.position.x, rb.position.y);
+        Vector3 direction = (attackDirection - rb3).normalized;
+        attackPoint.position = rb3 + direction * attackMarginFromEntity;
+        if (!isBot)
+        {
+            aim.GetComponent<Transform>().position = attackPoint.position;
+        }
     }
     
     void OnCollisionEnter2D(Collision2D collision)
@@ -302,16 +313,17 @@ public class Entity : MonoBehaviour
             return;
         }
         
-        // Check if the object we collided with has the "Player" tag
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Entity player = collision.gameObject.GetComponent<Entity>();
+        Debug.Log("Collision with " + collision.gameObject.name);
 
-            if (player != null)
-            {
-                int damageAmount = 10; // Set your damage amount here
-                player.TakeDamage(damageAmount);
-            }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            int damageAmount = 1; // Set your damage amount here
+            TakeDamage(damageAmount);
         }
+    }
+    
+    public void SetActive(bool result)
+    {
+        isActive = result;
     }
 }

@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - npc
+  - aim
+  - Enemy
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -13,7 +16,7 @@ TagManager:
   - Water
   - UI
   - Enemies
-  - 
+  - dfdf
   - 
   - 
   - 
