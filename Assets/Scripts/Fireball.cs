@@ -22,7 +22,7 @@ public class Fireball : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            int damageAmount = 20; // Set your damage amount here
+            int damageAmount = 5; // Set your damage amount here
             collision.gameObject.GetComponent<Entity>().TakeDamage(damageAmount);
         }
     }

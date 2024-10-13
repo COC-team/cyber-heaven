@@ -6,6 +6,7 @@ public class Entity : MonoBehaviour
     public bool isBot = true;
     public GameObject aim;
     public bool isAlive = true;
+    public bool isActive = true;
     private GameObject player;
     private Rigidbody2D rb;
     public Animator animator;
@@ -52,7 +53,7 @@ public class Entity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isAlive)
+        if (!isAlive || !isActive)
         {
             return;
         }
@@ -246,7 +247,7 @@ public class Entity : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isAlive)
+        if (!isAlive || !isActive)
         {
             return;
         }
@@ -288,5 +289,10 @@ public class Entity : MonoBehaviour
             int damageAmount = 1; // Set your damage amount here
             TakeDamage(damageAmount);
         }
+    }
+    
+    public void SetActive(bool result)
+    {
+        isActive = result;
     }
 }
