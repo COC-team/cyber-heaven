@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Entity : MonoBehaviour
 {
     public bool isBot = true;
+    private GameObject player;
     private Rigidbody2D rb;
     public Animator animator;
     public Slider healthBar;
@@ -24,8 +25,6 @@ public class Entity : MonoBehaviour
 
     public float moveSpeed = 3f;
     private Vector2 movement = Vector2.zero;
-
-    private bool startRecord = false;
     
     // Start is called before the first frame update
     void Start()
@@ -38,6 +37,11 @@ public class Entity : MonoBehaviour
             healthBar.maxValue = maxHealth;
             healthBar.value = currentHealth;
         }
+        
+        if (isBot)
+        { 
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
     }
 
     // Update is called once per frame
@@ -45,56 +49,77 @@ public class Entity : MonoBehaviour
     {
         if (isBot)
         {
-            // enemiesLayer
-            // if (player != null && Vector2.Distance(transform.position, player.transform.position) 
-            //     <= attackRange + attackMarginFromEntity)
-            // {
-            //     // Reset animator parameters to stop the movement animation
-            //     animator.SetFloat("Horizontal", 0);
-            //     animator.SetFloat("Vertical", 0);
-            //     
-            //     // Determine if the player is to the left or right
-            //     if (player.transform.position.x > transform.position.x)
-            //     {
-            //         // Player is to the right
-            //         animator.SetTrigger("RightAttack");
-            //     }
-            //     else
-            //     {
-            //         // Player is to the left
-            //         animator.SetTrigger("LeftAttack");
-            //     }
-            //     
-            //     Vector3 direction = (Vector3) (player.transform.position - transform.position).normalized;
-            //
-            //     player.GetComponent<PlayerMovement>().TakeDamage(attackDamage);
-            //     player.GetComponent<PlayerMovement>().GetKnockback(knockbackForce, direction);
-            //     
-            //     yield return new WaitForSeconds(attackDuration + attackCooldown); // Wait for attack animation to complete
+            if (player != null && Vector2.Distance(transform.position, player.transform.position) 
+                <= attackRange + attackMarginFromEntity)
+            {
+                // Reset animator parameters to stop the movement animation
+                animator.SetFloat("Horizontal", 0);
+                animator.SetFloat("Vertical", 0);
+                
+                // Determine if the player is to the left or right
+                if (player.transform.position.x > transform.position.x)
+                {
+                    // Player is to the right
+                    animator.SetTrigger("RightAttack");
+                }
+                else
+                {
+                    // Player is to the left
+                    animator.SetTrigger("LeftAttack");
+                }
+                
+                Vector3 direction = (Vector3) (player.transform.position - transform.position).normalized;
+
+                //player.GetComponent<Entity>().TakeDamage(attackDamage);
+                //player.GetComponent<PlayerMovement>().GetKnockback(knockbackForce, direction);
+
+                Attack();
+                //WaitForSeconds(attackDuration + attackCooldown); // Wait for attack animation to complete
 
                 // // Cooldown before moving again
                 // yield return new WaitForSeconds(attackCooldown);
-            // }
-            // else
-            // {
-            //     // Move towards the player
-            //     animator.SetTrigger("StopAttack");
-            //     Vector2 direction = (player.transform.position - transform.position).normalized;
-            //
-            //     // Add random offset to the movement direction
-            //     Vector2 randomOffset = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
-            //     Vector2 randomizedDirection = (direction + randomOffset).normalized;
-            //
-            //     // Set animator parameters to reflect movement with randomized direction
-            //     animator.SetFloat("Horizontal", randomizedDirection.x);
-            //     animator.SetFloat("Vertical", randomizedDirection.y);
-            //
-            //     // Ensure the NPC moves with the random variation
-            //     transform.position += (Vector3)randomizedDirection * moveSpeed * Time.deltaTime;
-            //     
-            //     // Wait for a short period before moving again
-            //     yield return null; // Continue until the next frame
-            // }
+            }
+            else if (player != null)
+            {
+                Rigidbody2D rbPlayer = player.GetComponent<Rigidbody2D>();
+                attackDirection = new Vector3(rbPlayer.position.x, rbPlayer.position.y);
+                
+                if (Vector2.Distance(rb.position, rbPlayer.position) <= attackRange + attackMarginFromEntity)
+                {
+                    movement = Vector2.zero;
+                    if (rbPlayer.position.x > rb.position.x)
+                    {
+                        // Player is to the right
+                        animator.SetTrigger("RightAttack");
+                    }
+                    else
+                    {
+                        // Player is to the left
+                        animator.SetTrigger("LeftAttack");
+                    }
+                    Attack();
+                } 
+                else 
+                {
+                    // Move towards the player
+                    animator.SetTrigger("StopAttack");
+                    Vector2 direction = (rbPlayer.position - rb.position).normalized;
+
+                    // Add random offset to the movement direction
+                    Vector2 randomOffset = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
+                    Vector2 randomizedDirection = (direction + randomOffset).normalized;
+                    movement = randomizedDirection;
+                }
+                
+                // Set animator parameters to reflect movement with randomized direction
+                //animator.SetFloat("Horizontal", randomizedDirection.x);
+                //animator.SetFloat("Vertical", randomizedDirection.y);
+            
+                // Ensure the NPC moves with the random variation
+                //transform.position += (Vector3)randomizedDirection * moveSpeed * Time.deltaTime;
+                
+                // Wait for a short period before moving again
+            }
         }
         else
         {
@@ -146,13 +171,25 @@ public class Entity : MonoBehaviour
 
     void Attack()
     {
-        if (!animator.GetBool("Attack") && lastAttackFinish + attackCooldown <= Time.time)
+                    // && !animator.GetBool("RightAttack") && !animator.GetBool("LeftAttack")
+        if (isBot
+        || !isBot && !animator.GetBool("Attack"))
         {
-            Debug.Log("ATTACK");
-            animator.SetTrigger("Attack");
-            // Temporarily
-            ApplyDamage();
+            if (lastAttackFinish + attackCooldown <= Time.time)
+            {
+                Debug.Log("ATTACK");
+                animator.SetTrigger("Attack");
+                // Temporarily
+                ApplyDamage();
+            }
         }
+        //if (!animator.GetBool("Attack") && lastAttackFinish + attackCooldown <= Time.time)
+        //{
+            //Debug.Log("ATTACK");
+            //animator.SetTrigger("Attack");
+            // Temporarily
+            //ApplyDamage();
+        //}
     }
 
     void ApplyDamage()
@@ -160,13 +197,21 @@ public class Entity : MonoBehaviour
         // Vector3 rb3 = new Vector3(rb.position.x, rb.position.y);
         
         // animator.setTrigger("attack");
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemiesLayer);
-
-        foreach (Collider2D enemy in hitEnemies)
+        if (isBot)
         {
-            Debug.Log("HIT");
-            enemy.GetComponent<Entity>().TakeDamage(attackDamage);
-            // enemy.GetComponent<NPCMovement>().GetKnockback(knockbackForce, knockbackDirection);
+            Debug.Log("BOT HIT");
+            player.GetComponent<Entity>().TakeDamage(attackDamage);
+        }
+        else
+        {
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemiesLayer);
+
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                Debug.Log("HIT");
+                enemy.GetComponent<Entity>().TakeDamage(attackDamage);
+                // enemy.GetComponent<NPCMovement>().GetKnockback(knockbackForce, knockbackDirection);
+            }
         }
 
         lastAttackFinish = Time.time;
@@ -190,7 +235,8 @@ public class Entity : MonoBehaviour
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        Debug.Log("Entity took damage: " + damage);
+        
+        Debug.Log((isBot ? "Bot" : "Player") + " took damage: " + damage);
         
         if (healthBar != null)
         {
@@ -213,7 +259,8 @@ public class Entity : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!animator.GetBool("Attack"))
+        if (isBot && !animator.GetBool("RightAttack") && !animator.GetBool("LeftAttack") 
+        || !isBot && !animator.GetBool("Attack"))
         {
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);

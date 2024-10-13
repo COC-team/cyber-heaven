@@ -244,9 +244,8 @@ GameObject:
   - component: {fileID: 183284550}
   - component: {fileID: 183284552}
   - component: {fileID: 183284555}
-  - component: {fileID: 183284557}
   - component: {fileID: 183284558}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -413,32 +412,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &183284557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 183284546}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58cd54fb76fffcf448f2bd5894f8c93a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 183284555}
-  moveSpeed: 3
-  attackDuration: 1
-  attackCooldown: 0.5
-  attackRange: 0.5
-  attackMarginFromEntity: 0.5
-  attackDamage: 2
-  knockbackForce: 0.5
-  attackPoint: {fileID: 0}
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  healthBar: {fileID: 522464300}
-  maxHealth: 50
 --- !u!114 &183284558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +438,7 @@ MonoBehaviour:
     m_Bits: 64
   entityLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   moveSpeed: 5
 --- !u!1 &289943311
 GameObject:
@@ -2158,8 +2131,8 @@ GameObject:
   - component: {fileID: 993000876}
   - component: {fileID: 993000875}
   - component: {fileID: 993000874}
-  - component: {fileID: 993000873}
   - component: {fileID: 993000872}
+  - component: {fileID: 993000877}
   m_Layer: 6
   m_Name: NightEnemy
   m_TagString: Untagged
@@ -2209,29 +2182,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &993000873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993000870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8a72ce473aaf134bad88aaf1fc22042, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 993000875}
-  moveDistance: 2
-  moveDuration: 1
-  moveSpeed: 2
-  attackDuration: 1
-  attackCooldown: 1
-  knockbackForce: 0.5
-  attackRange: 1
-  attackMarginFromEntity: 0.5
-  attackDamage: 2
-  maxHealth: 50
 --- !u!61 &993000874
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2350,6 +2300,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &993000877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993000870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95fb49df7f4389b4cb8d3867debcabe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBot: 1
+  animator: {fileID: 993000875}
+  healthBar: {fileID: 0}
+  maxHealth: 30
+  attackDuration: 1
+  attackCooldown: 1
+  attackRange: 0.5
+  attackMarginFromEntity: 0.5
+  attackDamage: 2
+  enemiesLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  entityLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  moveSpeed: 3
 --- !u!1 &1186629611
 GameObject:
   m_ObjectHideFlags: 0
