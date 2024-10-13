@@ -7,6 +7,13 @@ public class Scene_changer : MonoBehaviour
     public float changeTime;
     public string sceneName;
 
+    void Start() {
+        GameObject persistentObject = GameObject.FindWithTag("BG_music");
+        if (persistentObject != null) {
+            Destroy(persistentObject); // Destroy it in the new scene
+        }
+    }
+    
     // Update is called once per frame
     void Update()
     {

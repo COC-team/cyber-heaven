@@ -5,10 +5,10 @@ using UnityEngine;
 public class BG_music_script : MonoBehaviour
 {
     
-    private void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
+void Awake() {
+    gameObject.tag = "BG_music"; // Assign a tag or name
+    DontDestroyOnLoad(gameObject);
+}
     
     // Start is called before the first frame update
     void Start()
