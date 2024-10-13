@@ -85,5 +85,12 @@ public class SphereTeleport : MonoBehaviour
             enemy.GetComponent<Entity>().SetActive(true);
         }
         ActivateTeleportation();
+
+		GameObject objectToDelete = GameObject.Find("Exodus Dialogue");
+
+        if (objectToDelete != null)
+        {
+            Destroy(objectToDelete);
+        }
     }
 }
