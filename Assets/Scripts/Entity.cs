@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Entity : MonoBehaviour
 {
     public bool isBot = true;
+    public bool isAlive = true;
     private Rigidbody2D rb;
     public Animator animator;
     public Slider healthBar;
@@ -43,6 +44,11 @@ public class Entity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isAlive)
+        {
+            return;
+        }
+        
         if (isBot)
         {
             // enemiesLayer
@@ -206,6 +212,15 @@ public class Entity : MonoBehaviour
     void Die()
     {
         Debug.Log("Entity died!");
+        animator.SetTrigger("Death");
+        if (isBot)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            isAlive = false;
+        }
 
         // Можно добавить анимацию смерти или эффект
         // Destroy(gameObject);

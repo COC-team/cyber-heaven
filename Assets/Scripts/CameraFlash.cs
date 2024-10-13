@@ -18,7 +18,7 @@ public class CameraFlash : MonoBehaviour
             StartCoroutine(FlashRed());
 			if (player != null)
         	{
-            	player.GetComponent<PlayerHealth>().TakeDamage(10);
+            	player.GetComponent<Entity>().TakeDamage(10);
         	}
         	else
         	{
