@@ -248,7 +248,7 @@ public class Entity : MonoBehaviour
     {
         if (!isAlive)
         {
-            return
+            return;
         }
         if (!isAttacking)
         {
