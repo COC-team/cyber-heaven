@@ -16,7 +16,6 @@ public class Entity : MonoBehaviour
     private int currentHealth;
 
 
-    private float attackStartTime = 0f;
     private bool isAttacking = false;
     
     private bool isKnockedBack = false;
@@ -66,39 +65,17 @@ public class Entity : MonoBehaviour
         
         if (isBot)
         {
-            if (player != null && Vector2.Distance(transform.position, player.transform.position) 
-                <= attackRange + attackMarginFromEntity)
-            {
-                // Reset animator parameters to stop the movement animation
-                animator.SetFloat("Horizontal", 0);
-                animator.SetFloat("Vertical", 0);
-                
-                // Determine if the player is to the left or right
-                if (player.transform.position.x > transform.position.x)
-                {
-                    // Player is to the right
-                    animator.SetTrigger("RightAttack");
-                }
-                else
-                {
-                    // Player is to the left
-                    animator.SetTrigger("LeftAttack");
-                }
-                
-                Vector3 direction = (Vector3) (player.transform.position - transform.position).normalized;
-
-                //player.GetComponent<PlayerMovement>().GetKnockback(knockbackForce, direction);
-
-                Attack();
-            }
-            else if (player != null)
+            if (player != null)
             {
                 Rigidbody2D rbPlayer = player.GetComponent<Rigidbody2D>();
                 attackDirection = new Vector3(rbPlayer.position.x, rbPlayer.position.y);
                 
                 if (Vector2.Distance(rb.position, rbPlayer.position) <= attackRange + attackMarginFromEntity)
                 {
-                    movement = Vector2.zero;
+                    
+                    movement = new Vector2(0, 0);
+                    animator.SetFloat("Horizontal", movement.x);
+                    animator.SetFloat("Vertical", movement.y);
                     if (rbPlayer.position.x > rb.position.x)
                     {
                         // Player is to the right
@@ -114,6 +91,7 @@ public class Entity : MonoBehaviour
                 else 
                 {
                     // Move towards the player
+                    isAttacking = false;
                     animator.SetTrigger("StopAttack");
                     Vector2 direction = (rbPlayer.position - rb.position).normalized;
 
@@ -174,19 +152,22 @@ public class Entity : MonoBehaviour
                 if (!isBot)
                     animator.SetTrigger("Attack");
                 isAttacking = true;
-                attackStartTime = Time.time;
             }
         }
     }
 
     void ApplyDamage()
     {
-        if (isBot)
+        if (isBot && isAttacking)
         {
-            Debug.Log("BOT HIT");
-            player.GetComponent<Entity>().TakeDamage(attackDamage);
-            Vector2 knockbackDirection = player.GetComponent<Rigidbody2D>().position - rb.position;
-            player.GetComponent<Entity>().GetKnockback(knockbackForce, knockbackDirection);
+            Rigidbody2D rbPlayer = player.GetComponent<Rigidbody2D>();
+            if (Vector2.Distance(rb.position, rbPlayer.position) <= attackRange + attackMarginFromEntity)
+            {
+                Debug.Log("BOT HIT");
+                player.GetComponent<Entity>().TakeDamage(attackDamage);
+                Vector2 knockbackDirection = player.GetComponent<Rigidbody2D>().position - rb.position;
+                player.GetComponent<Entity>().GetKnockback(knockbackForce, knockbackDirection);
+            }
         }
         else
         {
@@ -198,10 +179,9 @@ public class Entity : MonoBehaviour
                 enemy.GetComponent<Entity>().TakeDamage(attackDamage);
                 Vector2 knockbackDirection = enemy.GetComponent<Rigidbody2D>().position - rb.position;
                 enemy.GetComponent<Entity>().GetKnockback(knockbackForce, knockbackDirection);
-                // enemy.GetComponent<NPCMovement>().GetKnockback(knockbackForce, knockbackDirection);
             }
         }
-
+        isAttacking = false;
         lastAttackFinish = Time.time;
     }
 
@@ -226,6 +206,7 @@ public class Entity : MonoBehaviour
         yield return new WaitForSeconds(knockbackDuration);
         isKnockedBack = false; // Allow movement again after knockback duration
     }
+    
     
     public void Heal(int healAmount)
     {
@@ -291,11 +272,6 @@ public class Entity : MonoBehaviour
         }
         else
         {
-            if (attackStartTime + attackDuration <= Time.time)
-            {
-                ApplyDamage();
-                isAttacking = false;
-            }
         }
         Vector3 rb3 = new Vector3(rb.position.x, rb.position.y);
         Vector3 direction = (attackDirection - rb3).normalized;
