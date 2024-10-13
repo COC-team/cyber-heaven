@@ -291,7 +291,7 @@ public class Entity : MonoBehaviour
         
         Debug.Log("Collision with " + collision.gameObject.name);
 
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Boss"))
         {
             int damageAmount = 1; // Set your damage amount here
             TakeDamage(damageAmount);
