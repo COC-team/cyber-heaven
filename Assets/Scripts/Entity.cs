@@ -313,6 +313,7 @@ public class Entity : MonoBehaviour
         Debug.Log("Scene name: " + sceneName);
         if (sceneName != null)
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene(sceneName);
         }
     }

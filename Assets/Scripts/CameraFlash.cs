@@ -7,6 +7,7 @@ public class CameraFlash : MonoBehaviour
 {
     public Image flashImage; // Assign the UI Image here in the Inspector
     public TextMeshProUGUI flashText; // Assign the TextMeshProUGUI text here in the Inspector
+	public TextMeshProUGUI flashText2; // Assign the TextMeshProUGUI text here in the Inspector
 	public GameObject player;
     public float flashDuration = 0.5f; // Duration of the flash
 
@@ -34,11 +35,13 @@ public class CameraFlash : MonoBehaviour
 
         // Enable the text
         flashText.enabled = true;
+	    flashText2.enabled = true;
 
         // Make the text fully visible by setting alpha to 1
         Color textColor = flashText.color;
         textColor.a = 1f;
         flashText.color = textColor;
+		        flashText2.color = textColor;
 
         // Optionally, reset the alpha of the image to 1 before starting the flash
         Color flashColor = flashImage.color;
@@ -63,6 +66,7 @@ public class CameraFlash : MonoBehaviour
             // Set the alpha of the text based on elapsed time
             textColor.a = Mathf.Lerp(1f, 0f, elapsedTime / fadeTime);
             flashText.color = textColor;
+			            flashText2.color = textColor;
 
             yield return null;
         }
@@ -72,5 +76,6 @@ public class CameraFlash : MonoBehaviour
 
         // Disable the text after fading out
         flashText.enabled = false;
+		        flashText2.enabled = false;
     }
 }
