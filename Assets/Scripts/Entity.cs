@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Entity : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class Entity : MonoBehaviour
 
     public float moveSpeed = 3f;
     private Vector2 movement = Vector2.zero;
+    public string sceneName;
     
     // Start is called before the first frame update
     void Start()
@@ -242,6 +244,7 @@ public class Entity : MonoBehaviour
 
     void Die()
     {
+        LoadCutscene();
         Debug.Log("Entity died!");
         animator.SetTrigger("Death");
         movement = Vector2.zero;
@@ -253,6 +256,7 @@ public class Entity : MonoBehaviour
         {
             isAlive = false;
         }
+        
 
         // Можно добавить анимацию смерти или эффект
         // Destroy(gameObject);
@@ -301,5 +305,15 @@ public class Entity : MonoBehaviour
     public void SetActive(bool result)
     {
         isActive = result;
+    }
+    
+    public void LoadCutscene()
+    {
+        Debug.Log("Loading cutscene...");
+        Debug.Log("Scene name: " + sceneName);
+        if (sceneName != null)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }
