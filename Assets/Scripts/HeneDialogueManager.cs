@@ -38,6 +38,7 @@ public class HeneDialogueManager : MonoBehaviour
 
                     // Get the position of the hidden object
                     Vector3 spawnPosition = targetObject.transform.position;
+                    enemyPrefab.SetActive(true);
 
                     // Spawn a new enemy at the hidden object's position
                     Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
