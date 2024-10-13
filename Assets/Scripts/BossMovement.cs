@@ -33,12 +33,12 @@ public class BossMovement : MonoBehaviour
                 if (player.transform.position.x > transform.position.x)
                 {
                     // Player is to the right
-                    animator.SetTrigger("BossRightHit");
+                    animator.SetTrigger("RightAttack");
                 }
                 else
                 {
                     // Player is to the left
-                    animator.SetTrigger("BossLeftHit");
+                    animator.SetTrigger("LeftAttack");
                 }
 
                 yield return new WaitForSeconds(attackDuration); // Wait for attack animation to complete
