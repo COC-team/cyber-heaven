@@ -81,6 +81,12 @@ public class PlayerMovement : MonoBehaviour
         lastAttackFinish = Time.time + attackDuration + attackCooldown;
     }
     
+    // void ApplyDamage()
+    // {
+    //     //TODO Работает, но во время ходьбы анимация не проигрывается
+    //     Debug.Log("APPLY");
+    // }
+    
     public void Heal(int healAmount)
     {
         currentHealth += healAmount;
