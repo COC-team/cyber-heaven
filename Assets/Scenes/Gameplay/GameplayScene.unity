@@ -798,7 +798,7 @@ Transform:
   m_GameObject: {fileID: 183284546}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.8, y: 10.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -994,7 +994,7 @@ MonoBehaviour:
   attackCooldown: 1
   attackRange: 0.5
   attackMarginFromEntity: 0.5
-  attackDamage: 1000
+  attackDamage: 10
   enemiesLayer:
     serializedVersion: 2
     m_Bits: 64
