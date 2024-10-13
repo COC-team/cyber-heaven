@@ -65,10 +65,12 @@ public class SphereTeleport : MonoBehaviour
     // Detect collision with player and deal damage
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if the object we collided with has the "Player" tag
+        Debug.Log("Sphere Collision with " + collision.gameObject.name);
+
         if (collision.gameObject.CompareTag("Player"))
         {
-            // TODO: Deal damage to the player
+            int damageAmount = 20; // Set your damage amount here
+            collision.gameObject.GetComponent<Entity>().TakeDamage(damageAmount);
         }
     }
 }

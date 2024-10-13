@@ -307,10 +307,12 @@ public class Entity : MonoBehaviour
         {
             return;
         }
+        
+        Debug.Log("Collision with " + collision.gameObject.name);
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            int damageAmount = 5; // Set your damage amount here
+            int damageAmount = 1; // Set your damage amount here
             TakeDamage(damageAmount);
         }
     }
