@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Entity : MonoBehaviour
 {
     public bool isBot = true;
+    public GameObject aim;
     public bool isAlive = true;
     private GameObject player;
     private Rigidbody2D rb;
@@ -13,6 +14,8 @@ public class Entity : MonoBehaviour
     private int currentHealth;
 
 
+    private float attackStartTime = 0f;
+    private bool isAttacking = false;
     public float attackDuration = 1f; // Duration of the attack animation
     public float attackCooldown = 1f; // Cooldown before the next attack
     private float lastAttackFinish = 0f;
@@ -32,6 +35,7 @@ public class Entity : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         attackPoint = new GameObject().transform;
+        aim = GameObject.FindGameObjectWithTag("aim");
         currentHealth = maxHealth;
         if (healthBar != null)
         {
@@ -76,14 +80,9 @@ public class Entity : MonoBehaviour
                 
                 Vector3 direction = (Vector3) (player.transform.position - transform.position).normalized;
 
-                //player.GetComponent<Entity>().TakeDamage(attackDamage);
                 //player.GetComponent<PlayerMovement>().GetKnockback(knockbackForce, direction);
 
                 Attack();
-                //WaitForSeconds(attackDuration + attackCooldown); // Wait for attack animation to complete
-
-                // // Cooldown before moving again
-                // yield return new WaitForSeconds(attackCooldown);
             }
             else if (player != null)
             {
@@ -116,15 +115,6 @@ public class Entity : MonoBehaviour
                     Vector2 randomizedDirection = (direction + randomOffset).normalized;
                     movement = randomizedDirection;
                 }
-                
-                // Set animator parameters to reflect movement with randomized direction
-                //animator.SetFloat("Horizontal", randomizedDirection.x);
-                //animator.SetFloat("Vertical", randomizedDirection.y);
-            
-                // Ensure the NPC moves with the random variation
-                //transform.position += (Vector3)randomizedDirection * moveSpeed * Time.deltaTime;
-                
-                // Wait for a short period before moving again
             }
         }
         else
@@ -166,43 +156,24 @@ public class Entity : MonoBehaviour
         }
     }
     
-    void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-            return;
-        
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
-
     void Attack()
     {
                     // && !animator.GetBool("RightAttack") && !animator.GetBool("LeftAttack")
-        if (isBot
-        || !isBot && !animator.GetBool("Attack"))
+        if (!isAttacking)
         {
             if (lastAttackFinish + attackCooldown <= Time.time)
             {
                 Debug.Log("ATTACK");
-                animator.SetTrigger("Attack");
-                // Temporarily
-                ApplyDamage();
+                if (!isBot)
+                    animator.SetTrigger("Attack");
+                isAttacking = true;
+                attackStartTime = Time.time;
             }
         }
-        //if (!animator.GetBool("Attack") && lastAttackFinish + attackCooldown <= Time.time)
-        //{
-            //Debug.Log("ATTACK");
-            //animator.SetTrigger("Attack");
-            // Temporarily
-            //ApplyDamage();
-        //}
     }
 
     void ApplyDamage()
     {
-        // Vector3 rb3 = new Vector3(rb.position.x, rb.position.y);
-        
-        // animator.setTrigger("attack");
         if (isBot)
         {
             Debug.Log("BOT HIT");
@@ -277,11 +248,9 @@ public class Entity : MonoBehaviour
     {
         if (!isAlive)
         {
-            return;
+            return
         }
-        
-        if (isBot && !animator.GetBool("RightAttack") && !animator.GetBool("LeftAttack") 
-        || !isBot && !animator.GetBool("Attack"))
+        if (!isAttacking)
         {
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);
@@ -290,15 +259,19 @@ public class Entity : MonoBehaviour
             Vector3 rb3 = new Vector3(rb.position.x, rb.position.y);
             Vector3 direction = (attackDirection - rb3).normalized;
             attackPoint.position = rb3 + direction * attackMarginFromEntity;
+            if (!isBot)
+            {
+                aim.GetComponent<Transform>().position = attackPoint.position;
+            }
         }
-    }
-
-    bool isPlaying(string animationName)
-    {
-        if (animator == null)
-            return false;
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(entityLayer.value); // 0 is the layer index
-        return stateInfo.IsName(animationName);
+        else
+        {
+            if (attackStartTime + attackDuration <= Time.time)
+            {
+                ApplyDamage();
+                isAttacking = false;
+            }
+        }
     }
     
     void OnCollisionEnter2D(Collision2D collision)
