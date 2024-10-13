@@ -294,4 +294,24 @@ public class Entity : MonoBehaviour
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(entityLayer.value); // 0 is the layer index
         return stateInfo.IsName(animationName);
     }
+    
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!isAlive || isBot)
+        {
+            return;
+        }
+        
+        // Check if the object we collided with has the "Player" tag
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Entity player = collision.gameObject.GetComponent<Entity>();
+
+            if (player != null)
+            {
+                int damageAmount = 10; // Set your damage amount here
+                player.TakeDamage(damageAmount);
+            }
+        }
+    }
 }
