@@ -301,17 +301,11 @@ public class Entity : MonoBehaviour
         {
             return;
         }
-        
-        // Check if the object we collided with has the "Player" tag
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Entity player = collision.gameObject.GetComponent<Entity>();
 
-            if (player != null)
-            {
-                int damageAmount = 10; // Set your damage amount here
-                player.TakeDamage(damageAmount);
-            }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            int damageAmount = 5; // Set your damage amount here
+            TakeDamage(damageAmount);
         }
     }
 }
