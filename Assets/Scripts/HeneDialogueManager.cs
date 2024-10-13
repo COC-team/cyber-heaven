@@ -4,18 +4,21 @@ using UnityEngine;
 public class HeneDialogueManager : MonoBehaviour
 {
     private int dialogueCount = 0;
-    private const int maxDialogueCount = 16;  // Set the count required to trigger the final event
     public GameObject enemyPrefab; // Prefab of the new enemy to spawn
+    private bool[] ids = new bool[8];
 
     // This function is called by the NPC script to increment the count
-    public void IncrementDialogueCount()
+    public void IncrementDialogueCount(int id)
     {
-        dialogueCount++;
-        Debug.Log("Dialogue count: " + dialogueCount);
-
-        if (dialogueCount >= maxDialogueCount)
+        if (!ids[id])
         {
-            TriggerFinalFight();
+            dialogueCount++;
+            Debug.Log("Dialogue count: " + dialogueCount);
+            ids[id] = true;
+            if (dialogueCount == 8)
+            {
+                TriggerFinalFight();
+            }
         }
     }
 
