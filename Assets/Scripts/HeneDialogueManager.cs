@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class HeneDialogueManager : MonoBehaviour
 {
+    public BG_music_script bgMusicScript;
     private int dialogueCount = 0;
     public GameObject enemyPrefab; // Prefab of the new enemy to spawn
     private bool[] ids = new bool[9];
@@ -26,7 +27,6 @@ public class HeneDialogueManager : MonoBehaviour
     private void TriggerFinalFight()
     {
         Debug.Log("All dialogues completed! Triggering the final fight!");
-        // Add logic for the final boss fight here
         foreach (string targetName in new List<string> { "Anna", "Dima", "Margarita", "Mark", "Martin" })
         {
             // Find all objects with the specified name
@@ -45,6 +45,7 @@ public class HeneDialogueManager : MonoBehaviour
 
                     // Spawn a new enemy at the hidden object's position
                     Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                    bgMusicScript.StartBossFightMusic();
                 }
             }
         }
